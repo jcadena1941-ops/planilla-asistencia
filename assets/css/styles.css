@@ -1,0 +1,484 @@
+/* =========================================================
+   Generador de Planilla de Asistencia — estilos
+   Diseño sobrio / administrativo, optimizado para impresión
+   ========================================================= */
+
+:root {
+  --color-texto: #1c1c1c;
+  --color-texto-suave: #4a4a4a;
+  --color-linea: #1c1c1c;
+  --color-borde: #b9b9b9;
+  --color-borde-fuerte: #333333;
+  --color-fondo: #eef0f2;
+  --color-hoja: #ffffff;
+  --color-acento: #2f4a63;
+  --color-encabezado-tabla: #eef1f4;
+  --fuente-titulo: Georgia, "Times New Roman", Times, serif;
+  --fuente-texto: Arial, Helvetica, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fuente-texto);
+  color: var(--color-texto);
+  background: var(--color-fondo);
+}
+
+/* ---------------------- Barra de herramientas ---------------------- */
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--color-acento);
+  color: #fff;
+  padding: 14px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.toolbar-titulo {
+  font-weight: 600;
+  font-size: 15px;
+  margin-right: auto;
+}
+
+.control-papel {
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.control-papel select {
+  font-family: var(--fuente-texto);
+  font-size: 13px;
+  padding: 5px 6px;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: #ffffff;
+  color: var(--color-texto);
+}
+
+.toolbar-botones {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: var(--fuente-texto);
+  font-size: 14px;
+  padding: 9px 16px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.btn-primario {
+  background: #ffffff;
+  color: var(--color-acento);
+  font-weight: 600;
+  border-color: #ffffff;
+}
+
+.btn-primario:hover {
+  background: #dfe6ec;
+}
+
+.btn-secundario {
+  background: transparent;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.btn-secundario:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.mensaje {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 13px;
+  min-height: 16px;
+}
+
+.mensaje.error {
+  color: #ffd7d7;
+}
+
+.mensaje.exito {
+  color: #d8f5df;
+}
+
+/* ---------------------- Hoja / documento ---------------------- */
+
+.hoja {
+  max-width: 900px;
+  margin: 28px auto 60px;
+  background: var(--color-hoja);
+  padding: 40px 48px 32px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.encabezado {
+  text-align: center;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--color-borde-fuerte);
+}
+
+.encabezado h1 {
+  font-family: var(--fuente-titulo);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin: 6px 0 0;
+  line-height: 1.35;
+}
+
+.bloque {
+  margin-bottom: 26px;
+}
+
+.bloque-config {
+  background: #f7f8fa;
+  border: 1px dashed var(--color-borde);
+  border-radius: 4px;
+  padding: 16px 18px;
+}
+
+.subtitulo {
+  font-family: var(--fuente-texto);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-acento);
+  border-bottom: 1px solid var(--color-borde);
+  padding-bottom: 6px;
+  margin: 0 0 14px;
+}
+
+.label-bloque {
+  display: block;
+  font-size: 13px;
+  color: var(--color-texto-suave);
+  margin-bottom: 6px;
+}
+
+.fila-campos {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 180px;
+}
+
+.campo-flex-1 {
+  flex: 1 1 200px;
+}
+
+.campo-flex-2 {
+  flex: 2 1 280px;
+}
+
+.campo-full {
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.campo label {
+  font-size: 12.5px;
+  color: var(--color-texto-suave);
+}
+
+.input-linea,
+.textarea-linea {
+  border: 1px solid #d7e0ea;
+  border-radius: 4px;
+  background: #f5f8fb;
+  font-family: var(--fuente-texto);
+  font-size: 14.5px;
+  color: var(--color-texto);
+  padding: 6px 8px;
+  width: 100%;
+}
+
+.input-linea:focus,
+.textarea-linea:focus,
+select.input-linea:focus {
+  outline: none;
+  background: #eaf1f8;
+  border-color: var(--color-acento);
+}
+
+.requerido {
+  color: #b3261e;
+  font-weight: 700;
+}
+
+.leyenda-requerido {
+  font-size: 12px;
+  color: var(--color-texto-suave);
+  margin: -6px 0 14px;
+}
+
+select.input-linea {
+  appearance: auto;
+  cursor: pointer;
+}
+
+.textarea-linea {
+  border: 1px solid var(--color-borde);
+  border-radius: 2px;
+  resize: vertical;
+  padding: 8px;
+}
+
+.input-hora {
+  max-width: 140px;
+}
+
+.ayuda {
+  font-size: 12px;
+  color: var(--color-texto-suave);
+  margin: 4px 0 0;
+}
+
+/* ---------------------- Días a incluir (chips + checkboxes) ---------------------- */
+
+.presets-dias {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.chip {
+  font-family: var(--fuente-texto);
+  font-size: 12.5px;
+  padding: 6px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--color-acento);
+  background: #ffffff;
+  color: var(--color-acento);
+  cursor: pointer;
+}
+
+.chip:hover {
+  background: var(--color-acento);
+  color: #ffffff;
+}
+
+.dias-checkbox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.dias-checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--color-texto);
+  cursor: pointer;
+}
+
+.dias-checkbox input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+/* ---------------------- Tabla ---------------------- */
+
+.tabla-asistencia {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+.tabla-asistencia th,
+.tabla-asistencia td {
+  border: 1px solid var(--color-borde-fuerte);
+  padding: 6px 6px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.tabla-asistencia thead th {
+  background: var(--color-encabezado-tabla);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.tabla-asistencia .col-fecha {
+  min-width: 130px;
+}
+
+.tabla-asistencia .col-obs {
+  min-width: 180px;
+}
+
+.tabla-asistencia td.celda-fecha {
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.tabla-asistencia input[type="text"] {
+  width: 100%;
+  border: none;
+  background: transparent;
+  text-align: center;
+  font-family: var(--fuente-texto);
+  font-size: 12.5px;
+  padding: 3px 2px;
+}
+
+.tabla-asistencia input[type="text"]:focus {
+  outline: 1px solid var(--color-acento);
+  background: #f7f9fb;
+}
+
+.tabla-asistencia .celda-observacion {
+  text-align: left;
+}
+
+.select-observacion {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-family: var(--fuente-texto);
+  font-size: 12px;
+  padding: 3px 2px;
+  cursor: pointer;
+}
+
+.select-observacion:focus {
+  outline: 1px solid var(--color-acento);
+}
+
+.input-observacion-otra {
+  width: 100%;
+  border: none;
+  border-top: 1px dashed var(--color-borde);
+  background: transparent;
+  font-family: var(--fuente-texto);
+  font-size: 12px;
+  padding: 3px 2px;
+  margin-top: 2px;
+}
+
+.oculto {
+  display: none !important;
+}
+
+.fila-vacia td {
+  text-align: center;
+  color: var(--color-texto-suave);
+  font-style: italic;
+  padding: 22px 10px;
+}
+
+/* ---------------------- Responsive ---------------------- */
+
+@media (max-width: 720px) {
+  .hoja {
+    padding: 24px 18px;
+    margin: 12px;
+  }
+
+  .fila-campos {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .toolbar-titulo {
+    margin-right: 0;
+  }
+
+  .tabla-asistencia {
+    font-size: 11px;
+  }
+}
+
+/* ---------------------- Impresión ---------------------- */
+/* El tamaño de página (@page size) se define dinámicamente en el
+   elemento <style id="estiloPagina"> dentro del <head>, según el
+   selector "Tamaño de papel" de la barra de herramientas. */
+
+@media print {
+  .no-print,
+  .toolbar {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff;
+  }
+
+  .hoja {
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .subtitulo {
+    color: var(--color-texto);
+  }
+
+  .tabla-asistencia thead {
+    display: table-header-group;
+  }
+
+  .tabla-asistencia tfoot {
+    display: table-footer-group;
+  }
+
+  .tabla-asistencia tr {
+    page-break-inside: avoid;
+  }
+
+  .input-linea,
+  .textarea-linea {
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    padding: 4px 2px !important;
+  }
+
+  select.input-linea,
+  .select-observacion {
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  a[href]::after {
+    content: "";
+  }
+}

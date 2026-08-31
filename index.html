@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador de Planilla de Asistencia</title>
+<link rel="stylesheet" href="assets/css/styles.css">
+<style id="estiloPagina">@page { size: A4 portrait; margin: 14mm 12mm; }</style>
+</head>
+<body>
+
+  <!-- ===================== BARRA DE HERRAMIENTAS (no se imprime) ===================== -->
+  <div class="toolbar no-print">
+    <div class="toolbar-titulo">Generador de planilla de asistencia</div>
+
+    <label class="control-papel">
+      Tamaño de papel:
+      <select id="tamanioPapel">
+        <option value="A4" selected>A4</option>
+        <option value="Letter">Carta (Letter)</option>
+        <option value="Legal">Legal</option>
+      </select>
+    </label>
+
+    <div class="toolbar-botones">
+      <button type="button" id="btnGenerar" class="btn btn-primario">Generar planilla</button>
+      <button type="button" id="btnLimpiar" class="btn btn-secundario">Limpiar formulario</button>
+      <button type="button" id="btnImprimir" class="btn btn-secundario">🖨 Imprimir / Guardar PDF</button>
+    </div>
+    <p id="mensaje" class="mensaje" role="status" aria-live="polite"></p>
+  </div>
+
+  <!-- ===================== DOCUMENTO / HOJA ===================== -->
+  <main class="hoja" id="hoja">
+
+    <header class="encabezado">
+      <h1>Constancia de Asistencia<br>y Registro de Horarios</h1>
+    </header>
+
+    <!-- ---------- Datos generales ---------- -->
+    <section class="bloque">
+      <div class="campo campo-full">
+        <label for="institucion">Institución: <span class="requerido no-print" aria-hidden="true">*</span></label>
+        <input type="text" id="institucion" class="input-linea" placeholder="">
+      </div>
+
+      <h2 class="subtitulo">Datos del pasante</h2>
+      <p class="leyenda-requerido no-print">Los campos marcados con <span class="requerido">*</span> son solo una guía para no olvidar completarlos; esa marca no aparece al imprimir ni al guardar como PDF.</p>
+
+      <div class="fila-campos">
+        <div class="campo campo-flex-2">
+          <label for="nombre">Nombre completo: <span class="requerido no-print" aria-hidden="true">*</span></label>
+          <input type="text" id="nombre" class="input-linea" placeholder="">
+        </div>
+        <div class="campo campo-flex-1">
+          <label for="ci">C.I.: <span class="requerido no-print" aria-hidden="true">*</span></label>
+          <input type="text" id="ci" class="input-linea" placeholder="">
+        </div>
+      </div>
+
+      <div class="fila-campos">
+        <div class="campo campo-flex-1">
+          <label for="mes">Mes: <span class="requerido no-print" aria-hidden="true">*</span></label>
+          <select id="mes" class="input-linea">
+            <option value="">Seleccione</option>
+            <option value="0">Enero</option>
+            <option value="1">Febrero</option>
+            <option value="2">Marzo</option>
+            <option value="3">Abril</option>
+            <option value="4">Mayo</option>
+            <option value="5">Junio</option>
+            <option value="6">Julio</option>
+            <option value="7">Agosto</option>
+            <option value="8">Septiembre</option>
+            <option value="9">Octubre</option>
+            <option value="10">Noviembre</option>
+            <option value="11">Diciembre</option>
+          </select>
+        </div>
+        <div class="campo campo-flex-1">
+          <label for="anio">Año: <span class="requerido no-print" aria-hidden="true">*</span></label>
+          <input type="number" id="anio" class="input-linea" placeholder="" min="1900" max="2100" step="1">
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- Horario establecido ---------- -->
+    <section class="bloque">
+      <h2 class="subtitulo">Horario establecido</h2>
+      <div class="fila-campos">
+        <div class="campo campo-flex-1">
+          <label for="horarioEntradaGlobal">Horario de entrada:</label>
+          <input type="text" id="horarioEntradaGlobal" class="input-linea input-hora" placeholder="HH:MM">
+        </div>
+        <div class="campo campo-flex-1">
+          <label for="horarioSalidaGlobal">Horario de salida:</label>
+          <input type="text" id="horarioSalidaGlobal" class="input-linea input-hora" placeholder="HH:MM">
+        </div>
+      </div>
+      <p class="ayuda no-print">Estos valores se usarán para pre-llenar la columna de horario establecido de cada día. Luego puedes ajustar cualquier fila de forma individual.</p>
+    </section>
+
+    <!-- ---------- Configuración: días a incluir (no se imprime, es solo para generar) ---------- -->
+    <section class="bloque bloque-config no-print">
+      <h2 class="subtitulo">Días a incluir</h2>
+      <div class="presets-dias">
+        <button type="button" class="chip" data-preset="laboral">Lunes a viernes</button>
+        <button type="button" class="chip" data-preset="sabado">Lunes a sábado</button>
+        <button type="button" class="chip" data-preset="todos">Todos los días</button>
+      </div>
+      <div class="dias-checkbox">
+        <label><input type="checkbox" class="check-dia" value="1" checked> Lunes</label>
+        <label><input type="checkbox" class="check-dia" value="2" checked> Martes</label>
+        <label><input type="checkbox" class="check-dia" value="3" checked> Miércoles</label>
+        <label><input type="checkbox" class="check-dia" value="4" checked> Jueves</label>
+        <label><input type="checkbox" class="check-dia" value="5" checked> Viernes</label>
+        <label><input type="checkbox" class="check-dia" value="6"> Sábado</label>
+        <label><input type="checkbox" class="check-dia" value="0"> Domingo</label>
+      </div>
+      <p class="ayuda">Desmarca los días que no correspondan. Por ejemplo, marca "Sábado" solo si ese mes hubo ingresos autorizados en sábado.</p>
+    </section>
+
+    <!-- ---------- Configuración: rango de días (no se imprime) ---------- -->
+    <section class="bloque bloque-config no-print">
+      <h2 class="subtitulo">Rango de días del mes (opcional)</h2>
+      <div class="fila-campos">
+        <div class="campo campo-flex-1">
+          <label for="diaDesde">Desde el día:</label>
+          <input type="number" id="diaDesde" class="input-linea" min="1" max="31" placeholder="1">
+        </div>
+        <div class="campo campo-flex-1">
+          <label for="diaHasta">Hasta el día:</label>
+          <input type="number" id="diaHasta" class="input-linea" min="1" max="31" placeholder="Último día del mes">
+        </div>
+      </div>
+      <p class="ayuda">Útil si el registro no cubre el mes completo — por ejemplo, si el pasante empezó el día 20. Déjalo vacío para generar el mes completo.</p>
+    </section>
+
+    <!-- ---------- Tabla de registro ---------- -->
+    <section class="bloque">
+      <h2 class="subtitulo">Registro de asistencia</h2>
+      <table class="tabla-asistencia" id="tablaAsistencia">
+        <thead>
+          <tr>
+            <th class="col-fecha">Fecha</th>
+            <th>Horario<br>entrada</th>
+            <th>Marcación<br>entrada</th>
+            <th>Horario<br>salida</th>
+            <th>Marcación<br>salida</th>
+            <th class="col-obs">Observación</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpoTabla">
+          <tr class="fila-vacia" id="filaVacia">
+            <td colspan="6">Selecciona el mes y el año, ajusta los días a incluir si hace falta, y presiona "Generar planilla".</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ---------- Observaciones generales ---------- -->
+    <section class="bloque">
+      <label for="observacionesGenerales" class="label-bloque">Observaciones generales:</label>
+      <textarea id="observacionesGenerales" class="textarea-linea" rows="3" placeholder=""></textarea>
+    </section>
+
+  </main>
+
+  <!-- Plantilla oculta para la fila de observación (usada por JS) -->
+  <template id="plantillaObservacion">
+    <select class="select-observacion">
+      <option value="Sin observación">Sin observación</option>
+      <option value="Feriado">Feriado</option>
+      <option value="Permiso de jornada completa">Permiso de jornada completa</option>
+      <option value="Permiso de media jornada">Permiso de media jornada</option>
+      <option value="Ingreso con permiso">Ingreso con permiso</option>
+      <option value="Salida con permiso">Salida con permiso</option>
+      <option value="No hubo registro de marcación">No hubo registro de marcación</option>
+      <option value="__otra__">Otra…</option>
+    </select>
+    <input type="text" class="input-observacion-otra oculto" placeholder="Escribe la observación">
+  </template>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
