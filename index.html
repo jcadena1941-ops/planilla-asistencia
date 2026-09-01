@@ -139,23 +139,26 @@
     <!-- ---------- Tabla de registro ---------- -->
     <section class="bloque">
       <h2 class="subtitulo">Registro de asistencia</h2>
-      <table class="tabla-asistencia" id="tablaAsistencia">
-        <thead>
-          <tr>
-            <th class="col-fecha">Fecha</th>
-            <th>Horario<br>entrada</th>
-            <th>Marcación<br>entrada</th>
-            <th>Horario<br>salida</th>
-            <th>Marcación<br>salida</th>
-            <th class="col-obs">Observación</th>
-          </tr>
-        </thead>
-        <tbody id="cuerpoTabla">
-          <tr class="fila-vacia" id="filaVacia">
-            <td colspan="6">Selecciona el mes y el año, ajusta los días a incluir si hace falta, y presiona "Generar planilla".</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="tabla-scroll">
+        <table class="tabla-asistencia" id="tablaAsistencia">
+          <thead>
+            <tr>
+              <th class="col-fecha">Fecha</th>
+              <th>Horario<br>entrada</th>
+              <th>Marcación<br>entrada</th>
+              <th>Horario<br>salida</th>
+              <th>Marcación<br>salida</th>
+              <th class="col-obs">Observación</th>
+            </tr>
+          </thead>
+          <tbody id="cuerpoTabla">
+            <tr class="fila-vacia" id="filaVacia">
+              <td colspan="6">Selecciona el mes y el año, ajusta los días a incluir si hace falta, y presiona "Generar planilla".</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ayuda tabla-ayuda-movil no-print">En pantallas pequeñas, desliza la tabla hacia los lados con el dedo para ver todas las columnas.</p>
     </section>
 
     <!-- ---------- Observaciones generales ---------- -->
