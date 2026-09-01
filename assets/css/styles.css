@@ -308,8 +308,20 @@ select.input-linea {
 
 /* ---------------------- Tabla ---------------------- */
 
+.tabla-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--color-borde);
+}
+
+.tabla-ayuda-movil {
+  display: none;
+}
+
 .tabla-asistencia {
   width: 100%;
+  min-width: 680px;
   border-collapse: collapse;
   font-size: 12.5px;
 }
@@ -424,6 +436,10 @@ select.input-linea {
   .tabla-asistencia {
     font-size: 11px;
   }
+
+  .tabla-ayuda-movil {
+    display: block;
+  }
 }
 
 /* ---------------------- Impresión ---------------------- */
@@ -450,6 +466,15 @@ select.input-linea {
 
   .subtitulo {
     color: var(--color-texto);
+  }
+
+  .tabla-scroll {
+    overflow: visible;
+    border: none;
+  }
+
+  .tabla-asistencia {
+    min-width: 0;
   }
 
   .tabla-asistencia thead {
